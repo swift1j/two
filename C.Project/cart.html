@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fashion Store</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: url(convert/banner-bg.png)center/100% 100% no-repeat;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      text-align: center;
+    }
+
+    img {
+      max-width: 150px;
+      height: auto;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      background-color: orange;
+      color: black;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+   
+
+    #cart-items {
+      list-style: none;
+      padding: 0;
+    }
+
+    #cart-items li {
+      padding: 5px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    #checkout {
+      width: 100%;
+      margin-top: 20px;
+      padding: 10px;
+      background-color: orange;
+      color: black;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .Sales {
+      margin-top: 30px;
+    }
+
+    .Sales img {
+      max-width: 120px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Fashion Store</h1>
+    <div class="product-list">
+      <h2>Featured Clothing</h2>
+      <table>
+        <tr>
+          <td>
+            <img src="convert/img.jpg" alt="Queen Tops">
+            <p>Queen Tops<br>Demure<br>$500</p>
+            <button class="add-to-cart" data-name="Queen Tops" data-price="500">ADD</button>
+          </td>
+          <td>
+            <img src="convert/img4.jpg" alt="Tullen Barrymore">
+            <p>Tullen Barrymore<br>Queen<br>$300</p>
+            <button class="add-to-cart" data-name="Tullen Barrymore" data-price="300">ADD</button>
+          </td>
+          <td>
+            <img src="convert/img3.jpg" alt="Rochas Animal Print">
+            <p>Rochas Animal Print<br>Pure Lady<br>$800</p>
+            <button class="add-to-cart" data-name="Rochas Animal Print" data-price="800">ADD</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="Sales">
+      <h1 align="center">LATEST TRENDS<br>Jewellery</h1>
+      <table align="center">
+        <tr>
+          <td>
+            <hr width="200"><img src="convert/jhumka-img.png" alt="Jhumka">
+            <p align="center">Pure Gold<br>Enchanting<br>@$100</p>
+            <button class="add-to-cart" data-name="Pure Gold Jhumka" data-price="100">ADD</button>
+          </td>
+          <td>-</td>
+          <td>
+            <hr width="200"><img src="convert/kangan-img.png" alt="Kangan">
+            <p align="center">RingsBrim<br>Smooth<br>@$100</p>
+            <button class="add-to-cart" data-name="RingsBrim Kangan" data-price="100">ADD</button>
+          </td>
+          <td>-</td>
+          <td>
+            <hr width="200"><img src="convert/neklesh-img.png" alt="Necklace">
+            <p align="center">Gold Stone<br>The Feel<br>@$100</p>
+            <button class="add-to-cart" data-name="Gold Stone Necklace" data-price="100">ADD</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <h2>Your Shopping List</h2>
+    <ul id="cart-items">
+    
+    </ul>
+    <p>Total: $<span id="total">0.00</span></p>
+    <button id="checkout">Proceed to Payment</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cartItems = [];
+      const cartList = document.getElementById('cart-items');
+      const totalDisplay = document.getElementById('total');
+      const checkoutButton = document.getElementById('checkout');
+
+      const updateCart = () => {
+        cartList.innerHTML = '';
+        let total = 0;
+        cartItems.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+          cartList.appendChild(li);
+          total += item.price;
+        });
+        totalDisplay.textContent = total.toFixed(2);
+      };
+
+      document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', () => {
+          const name = button.getAttribute('data-name');
+          const price = parseFloat(button.getAttribute('data-price'));
+          cartItems.push({ name, price });
+          updateCart();
+        });
+      });
+
+      checkoutButton.addEventListener('click', () => {
+        if (cartItems.length === 0) {
+          alert('Your cart is empty!');
+          return;
+        }
+        alert('Proceeding to payment...');
+       
+        window.location.href = "buy.html";
+      });
+    });
+  </script>
+</body>
+</html>
